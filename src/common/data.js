@@ -1,52 +1,34 @@
-import * as d3 from "d3"
-import { range } from "lodash"
-import d3Array from "d3-array"
-import caseIds from "../data/tucaseid.json"
-import activitiesJson from "../data/activities.json"
-import timeframeJson from "../data/timeframe.json"
+import * as d3 from "d3";
+import data from "../data/group_demog_2016_v3.tsv"
 
+const grpVals = {};
 
-const activities = activitiesJson.json_data
-const timeframe = timeframeJson.json_data
+data.forEach(function(o) {
+    grpVals["grp" + o.sex + o.racesimp + o.agegrp] = o;
+});
 
-const trCode = {
-    0: "Traveling",
-    1: "Sleeping",
-    2: "Personal Care",
-    3: "Work",
-    4: "Education",
-    5: "Eating & Drinking",
-    6: "Housework",
-    7: "Household Care",
-    8: "Non-Household Care",
-    9: "Shopping",
-    10: "Pro. Care Services",
-    11: "Leisure",
-    12: "Sports",
-    13: "Religion",
-    14: "Volunteering",
-    15: "Phone Calls",
-    16: "Misc",
-  };
+function type(d) {
+  d3.keys(d).map(function (key) {
+    d[key] = +d[key];
+  });
+  return d;
+}
 
-const timeLine = getTimeLine() 
-function getTimeLine(){
-    const offset = new Date().getTimezoneOffset();
+const fieldDetails = {
+  married: { desc: "Married", color: "#5B7BE9" },
+  children: { desc: "Own children in Household", color: "#E0D22E" },
+  healthcare: { desc: "Has Healthcare Coverage", color: "#2CCEF6" },
+  college: { desc: "Bachelor's Degree or More", color: "#FB7F23" },
+  employed: { desc: "Employed", color: "#D63CA3" },
+  selfemp: { desc: "Self-employed", color: "#c38014" },
+  publictrans: { desc: " Primarily Pub. Trans. to Work", color: "#E24062" },
+  income_moremed: { desc: "Personal Income Above Nat. Med.", color: "#5BB923" },
+  inpoverty: { desc: "Below Poverty Line", color: "#555" },
+  isveteran: { desc: "Veteran", color: "#B190D0" },
+  bornoutus: { desc: "Born Outside US", color: "#bcc832" },
+  diffmovecog: { desc: "Cog. or Phys. Difficulty", color: "#ee7b9c" },
+  diffhearvis: { desc: "Hearing or Vis. Difficulty", color: "#f299b3" },
+  widowed: { desc: "Widowed", color: "#01d99f" },
+};
 
-    const fourAm = new Date(`1995-12-17T${4 - offset / 60}:00:00`);
-    const fourAmOne = new Date(`1995-12-17T${4 - offset / 60}:01:00`);
-    const oneMinute = fourAmOne.getTime() - fourAm.getTime();
-
-    let timeline = [];
-
-    for (let i = 0; i < 1440; i++) {
-      let moment = fourAm.getTime() + i * oneMinute;
-      moment = new Date(moment);
-      moment = moment.toISOString().match(/\d*:\d*:\d*/g)[0];
-      timeline.push(moment);
-    }
-    return timeline;
-  }
-
-
-export {caseIds, activities,timeLine,timeframe, trCode}
+export { fieldDetails, grpVals };

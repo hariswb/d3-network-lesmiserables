@@ -1,4 +1,4 @@
 import "./index.css";
-import MovingBubbles from "./common/charts/movingBubbles";
+import SquarePie from "./common/charts/squarePie";
 
-MovingBubbles("chart_one")
+SquarePie()

@@ -1,11 +1,67 @@
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>D3 Sketches</title>
-</head>
-<body>
-    <div class="container">
-        <div id="chart_one" class="svg-chart"></div>
+  </head>
+  <body>
+    <div id="main-wrapper">
+      <h1 class="centered">How Groups of People Live</h1>
+      <p class="desc centered">Select among the following demographics.</p>
+
+      <div id="update">
+        <div id="sex" class="buttons">
+          <h3>Sex</h3>
+          <div class="button current" data-val="2">Female</div>
+          <div class="button" data-val="1" style="margin-right: 0">Male</div>
+          <div class="clr"></div>
+        </div>
+        <div id="agegrp" class="buttons">
+          <h3>Age Group</h3>
+          <div class="button" data-val="1">18 to 24</div>
+          <div class="button current" data-val="2">25 to 44</div>
+          <div class="button" data-val="3">45 to 64</div>
+          <div class="button" data-val="4" style="margin-right: 0">65+</div>
+          <div class="clr"></div>
+        </div>
+        <div id="racesimp" class="buttons">
+          <h3>Race or Origin</h3>
+          <div class="button current" data-val="1">White</div>
+          <div class="button" data-val="2">Black</div>
+          <div class="button" data-val="4">Asian</div>
+          <div class="button" data-val="3">Native</div>
+          <div class="button" data-val="5" style="margin-right: 0">
+            Hispanic
+          </div>
+          <div class="clr"></div>
+        </div>
+      </div>
+      <!-- @end #update -->
+
+      <div class="clr"></div>
+
+      <div id="totalcnt" class="centered">
+        <p class="desc centered">There are about this many people in this group…</p>
+        <div id="n"></div>
+      </div>
+      <p class="desc centered">…and of these people, here are their percentage breakdowns.</p>
+
+
+      <div class="genericholder">
+        <div id="charts"></div>
+      </div>
     </div>
-</body>
+
+    <script id="grid" type="text/plain">
+01 02 03 04 05 06 07 08 09 10
+11 12 13 14 15 16 17 18 19 20
+21 22 23 24 25 26 27 28 29 30
+31 32 33 34 35 36 37 38 39 40
+41 42 43 44 45 46 47 48 49 50
+51 52 53 54 55 56 57 58 59 60
+61 62 63 64 65 66 67 68 69 70
+71 72 73 74 75 76 77 78 79 80
+81 82 83 84 85 86 87 88 89 90
+91 92 93 94 95 96 97 98 99 100
+    </script>
+  </body>
 </html>
