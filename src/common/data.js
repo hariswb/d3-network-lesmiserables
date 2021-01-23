@@ -1,34 +1,19 @@
 import * as d3 from "d3";
-import data from "../data/group_demog_2016_v3.tsv"
+import lesmisgraph from "../data/lesmisgraph.json"
+import lesmischarsStr from "../data/lesmischars.json"
 
-const grpVals = {};
+// console.log(lesmisgraph)
+// console.log(JSON.parse(lesmischars))
+const lesmischars = JSON.parse(lesmischarsStr)
 
-data.forEach(function(o) {
-    grpVals["grp" + o.sex + o.racesimp + o.agegrp] = o;
-});
+const metrics_name = ["degree_centrality","betweenness_centrality","closeness_centrality","eigenvector_centrality","community"]
 
-function type(d) {
-  d3.keys(d).map(function (key) {
-    d[key] = +d[key];
-  });
-  return d;
-}
+const metrics_range = {}
 
-const fieldDetails = {
-  married: { desc: "Married", color: "#5B7BE9" },
-  children: { desc: "Own children in Household", color: "#E0D22E" },
-  healthcare: { desc: "Has Healthcare Coverage", color: "#2CCEF6" },
-  college: { desc: "Bachelor's Degree or More", color: "#FB7F23" },
-  employed: { desc: "Employed", color: "#D63CA3" },
-  selfemp: { desc: "Self-employed", color: "#c38014" },
-  publictrans: { desc: " Primarily Pub. Trans. to Work", color: "#E24062" },
-  income_moremed: { desc: "Personal Income Above Nat. Med.", color: "#5BB923" },
-  inpoverty: { desc: "Below Poverty Line", color: "#555" },
-  isveteran: { desc: "Veteran", color: "#B190D0" },
-  bornoutus: { desc: "Born Outside US", color: "#bcc832" },
-  diffmovecog: { desc: "Cog. or Phys. Difficulty", color: "#ee7b9c" },
-  diffhearvis: { desc: "Hearing or Vis. Difficulty", color: "#f299b3" },
-  widowed: { desc: "Widowed", color: "#01d99f" },
-};
-
-export { fieldDetails, grpVals };
+metrics_name.forEach(function(name){
+    metrics_range[name] = {
+        highest: d3.max(lesmischars.map(c=>c[name])),
+        lowest:d3.min(lesmischars.map(c=>c[name]))
+    }
+})
+export { lesmisgraph, lesmischars,metrics_range};

@@ -1,4 +1,4 @@
 import "./index.css";
-import SquarePie from "./common/charts/squarePie";
+import NetworkLesMiserables from "./common/charts/networklesmiserables";
 
-SquarePie()
+NetworkLesMiserables("network-chart")
